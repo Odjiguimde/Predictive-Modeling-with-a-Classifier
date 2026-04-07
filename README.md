@@ -26,7 +26,7 @@ Dans un contexte d’inclusion financière, notamment en Afrique, de nombreux in
 ## Structure du Projet
 
 ```
-projet5-churn/
+Predictive-Modeling-with-a-Classifier/
 │
 ├── app.py                          # Dashboard Streamlit interactif
 ├── telco_churn.csv                 # Dataset Telco Customer Churn

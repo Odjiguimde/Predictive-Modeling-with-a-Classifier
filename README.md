@@ -1,8 +1,8 @@
-# Modélisation Prédictive du Churn Client
+#     Modélisation Prédictive du Churn Client
 
-Prédiction du désabonnement client dans le secteur des Télécommunications.
-Projet réalisé dans le cadre d'un parcours Data Science (Projet 5 — Classification Supervisée).
+Ce projet vise à développer un système intelligent capable d’évaluer la solvabilité des clients et de leur attribuer un score de crédit fiable à partir de données financières hétérogènes.
 
+Dans un contexte d’inclusion financière, notamment en Afrique, de nombreux individus ne disposent pas d’historique bancaire classique. Ce système exploite des données alternatives (transactions, mobile money, revenus, dépenses) pour prédire le risque de défaut et faciliter l’accès au crédit.
 ---
 
 ## Objectif

@@ -6,14 +6,14 @@ Dans un contexte d’inclusion financière, notamment en Afrique, de nombreux in
 ## Objectif
 
 1.Identifier les clients à risque de churn (désabonnement) avant qu'ils ne partent,
-pour permettre une rétention proactive et réduire les pertes de revenus.
+    pour permettre une rétention proactive et réduire les pertes de revenus.
 
 2.Construire un pipeline complet de traitement des données financières.
 
 3.Identifier les facteurs clés influençant la solvabilité.
 
 4.Développer des modèles de machine learning pour la prédiction du risque de crédit
-Fournir un score de crédit interprétable et exploitable.
+    Fournir un score de crédit interprétable et exploitable.
 
 ---
 

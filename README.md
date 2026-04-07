@@ -1,14 +1,16 @@
 #     Modélisation Prédictive du Churn Client
 
 Ce projet vise à développer un système intelligent capable d’évaluer la solvabilité des clients et de leur attribuer un score de crédit fiable à partir de données financières hétérogènes.
-
 Dans un contexte d’inclusion financière, notamment en Afrique, de nombreux individus ne disposent pas d’historique bancaire classique. Ce système exploite des données alternatives (transactions, mobile money, revenus, dépenses) pour prédire le risque de défaut et faciliter l’accès au crédit.
----
 
 ## Objectif
 
-Identifier les clients à risque de churn (désabonnement) avant qu'ils ne partent,
+-Identifier les clients à risque de churn (désabonnement) avant qu'ils ne partent,
 pour permettre une rétention proactive et réduire les pertes de revenus.
+-Construire un pipeline complet de traitement des données financières
+-Identifier les facteurs clés influençant la solvabilité
+-Développer des modèles de machine learning pour la prédiction du risque de crédit
+Fournir un score de crédit interprétable et exploitable
 
 ---
 

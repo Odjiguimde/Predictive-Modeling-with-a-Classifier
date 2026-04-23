@@ -152,14 +152,14 @@ def train_all_models(df):
         "Régression Logistique": LogisticRegression(max_iter=1000, random_state=42),
         "K-Nearest Neighbors":   KNeighborsClassifier(n_neighbors=7),
         "Naive Bayes":           GaussianNB(),
-        "Random Forest":         RandomForestClassifier(n_estimators=150, random_state=42, n_jobs=-1),
-        "Gradient Boosting":     GradientBoostingClassifier(n_estimators=100, random_state=42),
+        "Random Forest":         RandomForestClassifier(n_estimators=50, random_state=42, n_jobs=-1),
+        "Gradient Boosting":     GradientBoostingClassifier(n_estimators=50, random_state=42),
     }
     if HAS_XGB:
-        models["XGBoost"] = XGBClassifier(n_estimators=100, random_state=42,
+        models["XGBoost"] = XGBClassifier(n_estimators=50, random_state=42,
                                            use_label_encoder=False, eval_metric="logloss", n_jobs=-1)
     if HAS_LGB:
-        models["LightGBM"] = LGBMClassifier(n_estimators=100, random_state=42, n_jobs=-1, verbose=-1)
+        models["LightGBM"] = LGBMClassifier(n_estimators=50, random_state=42, n_jobs=-1, verbose=-1)
 
     results = {}
     scaler = StandardScaler()
@@ -182,7 +182,7 @@ def train_all_models(df):
             "fpr": fpr, "tpr": tpr,
             "y_te": y_te.values, "y_pred": y_pred,
         }
-        cv = cross_val_score(m, X_tr_sc, y_tr, cv=StratifiedKFold(5), scoring="f1")
+        cv = cross_val_score(m, X_tr_sc, y_tr, cv=StratifiedKFold(3), scoring="f1")
         results[name]["cv_f1_mean"] = cv.mean()
         results[name]["cv_f1_std"]  = cv.std()
 

@@ -37,7 +37,7 @@ except ImportError:
 # ─────────────────────────────────────────────
 st.set_page_config(
     page_title="Churn Predictor Pro",
-    page_icon="📡",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -113,7 +113,7 @@ def fig():
 # ─────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/WA_Fn-UseC_-Telco-Customer-Churn.csv")
+    df = pd.read_csv("telco_churn.csv")
     df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
     df["TotalCharges"] = df["TotalCharges"].fillna(df["TotalCharges"].median())
     # Feature Engineering
@@ -194,9 +194,9 @@ def train_all_models(df):
 df = load_data()
 
 with st.sidebar:
-    st.markdown("## 📡 Churn Predictor Pro")
+    st.markdown("##  Churn Predictor Pro")
     st.markdown("---")
-    st.markdown('<p class="sec">🔍 Filtres</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sec"> Filtres</p>', unsafe_allow_html=True)
 
     contracts = st.multiselect("Contrat", df["Contract"].unique(), default=df["Contract"].unique())
     internet  = st.multiselect("Internet", df["InternetService"].unique(), default=df["InternetService"].unique())
@@ -218,7 +218,7 @@ with st.sidebar:
 # ─────────────────────────────────────────────
 # HEADER
 # ─────────────────────────────────────────────
-st.markdown("# 📡 Churn Predictor Pro")
+st.markdown("#  Churn Predictor Pro")
 st.markdown("**Modélisation prédictive du désabonnement client — Télécommunications**")
 st.markdown("---")
 
@@ -235,7 +235,7 @@ st.markdown("---")
 # ─────────────────────────────────────────────
 # TABS
 # ─────────────────────────────────────────────
-tabs = st.tabs(["📊 Aperçu & EDA", "🔬 Analyse Churn", "🤖 Modèles ML", "📈 Comparaison", "🎯 Prédiction Live"])
+tabs = st.tabs([" Aperçu & EDA", " Analyse Churn", " Modèles ML", " Comparaison", " Prédiction Live"])
 
 # ══════════════════════════════════════════════
 # TAB 1 — APERÇU
@@ -362,15 +362,15 @@ with tabs[1]:
     best_contract = churn_by_contract.idxmin()
 
     st.markdown(f"""
-    <div class="insight alert">📌 <b>Contrats Mensuels à Haut Risque :</b> Les clients en contrat mensuel
+    <div class="insight alert"> <b>Contrats Mensuels à Haut Risque :</b> Les clients en contrat mensuel
     churent à <b>{churn_by_contract.get('Month-to-month',0):.1%}</b> contre
     <b>{churn_by_contract.get('Two year',0):.1%}</b> pour les contrats 2 ans.
     Encourager les upgrades contractuels est une priorité absolue.</div>
 
-    <div class="insight warn">📌 <b>Fibre Optique :</b> Les abonnés Fibre présentent un taux de churn de
+    <div class="insight warn"> <b>Fibre Optique :</b> Les abonnés Fibre présentent un taux de churn de
     <b>{churn_fiber:.1%}</b>. La qualité perçue ou le pricing doivent être réévalués.</div>
 
-    <div class="insight good">📌 <b>Rétention par Ancienneté :</b> Les clients dépassant
+    <div class="insight good"> <b>Rétention par Ancienneté :</b> Les clients dépassant
     <b>36 mois</b> d'ancienneté churent 3x moins. Les programmes de fidélisation précoce sont rentables.</div>
     """, unsafe_allow_html=True)
 
@@ -380,16 +380,16 @@ with tabs[1]:
 with tabs[2]:
     st.markdown('<p class="sec">Entraînement des Modèles de Classification</p>', unsafe_allow_html=True)
 
-    if st.button("🚀 Lancer l'entraînement de tous les modèles", type="primary"):
+    if st.button(" Lancer l'entraînement de tous les modèles", type="primary"):
         with st.spinner("Entraînement en cours... ⏳"):
             results, scaler, X, y, X_tr, X_te, y_tr, y_te = train_all_models(df)
         st.session_state["results"] = results
         st.session_state["scaler"]  = scaler
         st.session_state["X_cols"]  = X.columns.tolist()
-        st.success("✅ Tous les modèles ont été entraînés avec succès !")
+        st.success(" Tous les modèles ont été entraînés avec succès !")
 
     if "results" not in st.session_state:
-        st.info("👆 Clique sur le bouton ci-dessus pour entraîner les modèles.")
+        st.info(" Clique sur le bouton ci-dessus pour entraîner les modèles.")
     else:
         results = st.session_state["results"]
         sel_model = st.selectbox("Sélectionner un modèle à analyser", list(results.keys()))
@@ -441,7 +441,7 @@ with tabs[2]:
 
         st.markdown('<p class="sec">Validation Croisée (5-Fold)</p>', unsafe_allow_html=True)
         st.markdown(f"""
-        <div class="insight good">✅ <b>CV F1-Score :</b> {res['cv_f1_mean']:.3f}
+        <div class="insight good"> <b>CV F1-Score :</b> {res['cv_f1_mean']:.3f}
         (± {res['cv_f1_std']:.3f}) — Stabilité du modèle validée sur 5 folds.</div>
         """, unsafe_allow_html=True)
 
@@ -452,7 +452,7 @@ with tabs[3]:
     st.markdown('<p class="sec">Comparaison des Modèles</p>', unsafe_allow_html=True)
 
     if "results" not in st.session_state:
-        st.info("👆 Entraîne d'abord les modèles dans l'onglet 'Modèles ML'.")
+        st.info(" Entraîne d'abord les modèles dans l'onglet 'Modèles ML'.")
     else:
         results = st.session_state["results"]
 
@@ -505,12 +505,12 @@ with tabs[3]:
         best_name = max(results, key=lambda k: results[k]["f1"])
         best_r = results[best_name]
         st.markdown(f"""
-        <div class="insight good">🏆 <b>Meilleur modèle : {best_name}</b><br>
+        <div class="insight good"> <b>Meilleur modèle : {best_name}</b><br>
         F1-Score : <b>{best_r['f1']:.3f}</b> | ROC-AUC : <b>{best_r['roc_auc']:.3f}</b> |
         Recall : <b>{best_r['recall']:.3f}</b><br>
         Ce modèle offre le meilleur compromis précision/rappel pour identifier les churners.</div>
 
-        <div class="insight">📌 <b>Recommandation métier :</b> Privilégier le <b>Recall</b> dans ce contexte —
+        <div class="insight"> <b>Recommandation métier :</b> Privilégier le <b>Recall</b> dans ce contexte —
         mieux vaut alerter un client fidèle par erreur que de rater un vrai churner. Un Recall ≥ 70%
         est recommandé pour une stratégie de rétention proactive.</div>
         """, unsafe_allow_html=True)
@@ -522,12 +522,12 @@ with tabs[4]:
     st.markdown('<p class="sec">Prédiction en Temps Réel</p>', unsafe_allow_html=True)
 
     if "results" not in st.session_state:
-        st.info("👆 Entraîne d'abord les modèles dans l'onglet 'Modèles ML'.")
+        st.info(" Entraîne d'abord les modèles dans l'onglet 'Modèles ML'.")
     else:
         results = st.session_state["results"]
         sel = st.selectbox("Modèle à utiliser", list(results.keys()), key="pred_model")
 
-        st.markdown("#### 👤 Profil du Client")
+        st.markdown("####  Profil du Client")
         col1, col2, col3 = st.columns(3)
 
         with col1:
@@ -550,7 +550,7 @@ with tabs[4]:
                                      "Bank transfer (automatic)","Credit card (automatic)"])
             paperless = st.selectbox("Facturation Dématérialisée", ["Yes","No"])
 
-        if st.button("🔮 Prédire le risque de Churn", type="primary"):
+        if st.button(" Prédire le risque de Churn", type="primary"):
             total_charges = round(monthly * tenure * 1.0, 2)
 
             input_data = {
@@ -593,7 +593,7 @@ with tabs[4]:
 
             # Result display
             color = "#ef476f" if pred==1 else "#52b788"
-            label = "⚠️ RISQUE DE CHURN" if pred==1 else "✅ CLIENT FIDÈLE"
+            label = "️ RISQUE DE CHURN" if pred==1 else " CLIENT FIDÈLE"
             st.markdown(f"""
             <div style='background:{BG}; border:2px solid {color}; border-radius:16px;
                 padding:1.5rem 2rem; text-align:center; margin:1rem 0;'>
@@ -606,21 +606,21 @@ with tabs[4]:
 
             if pred == 1:
                 st.markdown("""
-                <div class="insight alert">🚨 <b>Action Recommandée :</b> Ce client présente un risque élevé.
+                <div class="insight alert"> <b>Action Recommandée :</b> Ce client présente un risque élevé.
                 Envisagez : offre de rétention personnalisée, appel proactif, upgrade contractuel ou
                 remise sur la facturation mensuelle.</div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown("""
-                <div class="insight good">✅ <b>Client Stable :</b> Faible risque de churn détecté.
+                <div class="insight good"> <b>Client Stable :</b> Faible risque de churn détecté.
                 Continuez à l'engager avec des offres premium et des programmes de fidélisation.</div>
                 """, unsafe_allow_html=True)
 
         # API Info
         st.markdown("---")
-        st.markdown('<p class="sec">🔌 API Flask — Intégration</p>', unsafe_allow_html=True)
+        st.markdown('<p class="sec"> API Flask — Intégration</p>', unsafe_allow_html=True)
         st.markdown("""
-        <div class="insight">💡 <b>Déploiement API Flask disponible</b> — Le modèle peut être exposé
+        <div class="insight"> <b>Déploiement API Flask disponible</b> — Le modèle peut être exposé
         via une API REST. Lancer avec : <code>python api/app_flask.py</code><br>
         Endpoint : <code>POST http://localhost:5000/predict</code></div>
         """, unsafe_allow_html=True)

@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  # ─── Dashboard Streamlit ────────────────────
+  streamlit:
+    build: .
+    container_name: churn-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0 --server.headless=true
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  # ─── API Flask ──────────────────────────────
+  flask-api:
+    build: .
+    container_name: churn-api
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    command: python api/app_flask.py
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
